@@ -53,22 +53,18 @@ else
 # Include target-specific files.
 ifeq ($(call is-board-platform-in-list, msm8974), true)
 LOCAL_SRC_FILES += power-8974.c
-_HAS_MP_DECISION := true
 endif
 
 ifeq ($(call is-board-platform-in-list, msm8226), true)
 LOCAL_SRC_FILES += power-8226.c
-_HAS_MP_DECISION := true
 endif
 
 ifeq ($(call is-board-platform-in-list, msm8610), true)
 LOCAL_SRC_FILES += power-8610.c
-_HAS_MP_DECISION := true
 endif
 
 ifeq ($(call is-board-platform-in-list, apq8084), true)
 LOCAL_SRC_FILES += power-8084.c
-_HAS_MP_DECISION := true
 endif
 
 ifeq ($(call is-board-platform-in-list, msm8994), true)
@@ -162,11 +158,7 @@ ifeq ($(TARGET_HAS_NO_WLAN_STATS),true)
 LOCAL_CFLAGS += -DNO_WLAN_STATS
 endif
 LOCAL_MODULE := android.hardware.power@1.1-service-qti
-ifeq ($(_HAS_MP_DECISION),true)
-    LOCAL_INIT_RC := android.hardware.power@1.1-service-mpd.rc
-else
-    LOCAL_INIT_RC := android.hardware.power@1.1-service-qti.rc
-endif
+LOCAL_INIT_RC := android.hardware.power@1.1-service-qti.rc
 LOCAL_SHARED_LIBRARIES += android.hardware.power@1.1 vendor.lineage.power@1.0
 LOCAL_MODULE_TAGS := optional
 LOCAL_MODULE_OWNER := qcom
